@@ -1,0 +1,17 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.jojo.action_call_state">
+    <application>
+        <receiver android:name=".receiver.ActionCallStateBroadcast"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.yunke.ACTION_OUTGOING_CALL" />
+                <action android:name="com.yunke.ACTION_INCOMING_CALL" />
+                <action android:name="com.yunke.ACTION_CALL_DISCONNECTED" />
+                <action android:name="com.yunke.ACTION_CALL_REJECT" />
+                <action android:name="com.yunke.ACTION_CALL_CONNECTED" />
+                <action android:name="com.yunke.ACTION_CALL_RECORD" />
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
