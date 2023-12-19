@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.jojo.action_call_state">
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+
     <application>
         <receiver android:name=".receiver.ActionCallStateBroadcast"
             android:exported="true">
