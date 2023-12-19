@@ -10,13 +10,12 @@ import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.StreamHandler
 
 class ActionCallStateHandler(@NonNull binding: FlutterPluginBinding) : StreamHandler {
-    private var flutterPluginBinding: FlutterPluginBinding
+    private var flutterPluginBinding: FlutterPluginBinding = binding
     private lateinit var actionCallStateBroadcast: ActionCallStateBroadcast
-    private var actionCallEventChannel: EventChannel
+    private var actionCallEventChannel: EventChannel =
+        EventChannel(flutterPluginBinding.binaryMessenger, Constants.EVENT_CHANNEL)
 
     init {
-        flutterPluginBinding = binding
-        actionCallEventChannel = EventChannel(flutterPluginBinding.binaryMessenger, Constants.EVENT_CHANNEL)
         actionCallEventChannel.setStreamHandler(this)
     }
 
@@ -24,7 +23,14 @@ class ActionCallStateHandler(@NonNull binding: FlutterPluginBinding) : StreamHan
         actionCallStateBroadcast = object : ActionCallStateBroadcast() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 super.onReceive(context, intent)
-                events?.success("")
+                events?.success(
+                    mapOf(
+                        "systemMark" to systemMark,
+                        "callStatus" to actionCallStatus,
+                        "phoneNumber" to phoneNumber,
+                        "slotIndex" to slotIndex
+                    )
+                )
             }
         }
 
@@ -37,6 +43,5 @@ class ActionCallStateHandler(@NonNull binding: FlutterPluginBinding) : StreamHan
     fun dispose () {
         actionCallEventChannel.setStreamHandler(null)
     }
-
 
 }
