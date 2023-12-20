@@ -1,15 +1,6 @@
-import 'package:flutter/services.dart';
+library action_call_state;
 
-import 'action_call_state_platform_interface.dart';
-
-class ActionCallState {
-  Future<String?> getPlatformVersion() {
-    return ActionCallStatePlatform.instance.getPlatformVersion();
-  }
-
-  static const EventChannel _eventChannel = EventChannel('com.jojo.actionCallState');
-
-  static Stream<String> get stream {
-    return _eventChannel.receiveBroadcastStream().map((dynamic event) => "$event");
-  }
-}
+export 'src/data/action_call_data.dart' show ActionCallData;
+export "src/action_call_state.dart" show ActionCallState;
+export 'src/utils/action_call_status.dart' show ActionCallStatus;
+export 'src/utils/system_mark_type.dart' show SystemMarkType;

@@ -6,17 +6,15 @@
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
 
     <application>
-        <receiver android:name=".receiver.ActionCallStateBroadcast"
+        <receiver
             android:exported="true"
-        >
+            android:name=".receiver.ActionCallStateBroadcast">
             <intent-filter>
                 <action android:name="com.yunke.ACTION_OUTGOING_CALL" />
                 <action android:name="com.yunke.ACTION_INCOMING_CALL" />
                 <action android:name="com.yunke.ACTION_CALL_DISCONNECTED" />
                 <action android:name="com.yunke.ACTION_CALL_REJECT" />
                 <action android:name="com.yunke.ACTION_CALL_CONNECTED" />
-                <action android:name="android.intent.action.PHONE_STATE" />
-                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
             </intent-filter>
         </receiver>
     </application>

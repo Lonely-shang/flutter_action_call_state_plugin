@@ -16,6 +16,7 @@ open class ActionCallStateBroadcast : BroadcastReceiver() {
     var slotIndex: Number? = null
     var reocrdName: String? = null
 
+
     override fun onReceive(context: Context?, intent: Intent?) {
         try {
             when (val action: String? = intent?.action) {
@@ -28,17 +29,14 @@ open class ActionCallStateBroadcast : BroadcastReceiver() {
         }
     }
 
-    private fun handlerAndroidOutGoingCallState(intent: Intent?) {
+     private fun handlerAndroidOutGoingCallState(intent: Intent?) {
         systemMark = Constants.SYSTEM_MARK_ANDROID
         actionCallStatus = ActionCallStatus.CALL_OUTGOING
         phoneNumber = intent?.getStringExtra(Constants.EXTRA_OUTGOING_NUMBER)
         println()
     }
 
-    // 来电 YUNKE_INCOMING_CAL -> YUNKE_CALL_REJECT -> YUNKE_CALL_DISCONNECTED
-    // 来电  YUNKE_INCOMING_CAL ->YUNKE_CALL_CONNECTED -> Constants.YUNKE_CALL_RECORD -> YUNKE_CALL_DISCONNECTED
-
-    private fun handlerYunKeCallState(intent: Intent?, action: String?) {
+     private fun handlerYunKeCallState(intent: Intent?, action: String?) {
         try {
             actionCallStatus = when(action) {
                 Constants.YUNKE_INCOMING_CALL -> ActionCallStatus.CALL_INCOMING
@@ -57,7 +55,7 @@ open class ActionCallStateBroadcast : BroadcastReceiver() {
         }
     }
 
-    private fun handlerAndroidCallState(intent: Intent?) {
+     private fun handlerAndroidCallState(intent: Intent?) {
        try {
            val callState: String? = intent?.getStringExtra(TelephonyManager.EXTRA_STATE)
             actionCallStatus = when( callState ) {
